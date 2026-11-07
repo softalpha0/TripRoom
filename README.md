@@ -10,7 +10,7 @@ Full spec: [PRD.md](PRD.md)
 
 ## Demo
 
-- **Demo video:** _add link_
+- **Demo video (2:17):** https://youtu.be/HfV6ZZXyhB4
 - **Real run:** [`examples/real-run/`](examples/real-run/): three friends planned a real weekend in
   Grand-Bassam (Côte d'Ivoire) in one hour. 3 decisions by vote + confirm, 4 agent-written documents,
   one change request (Itinerary v4 → v5), and a $200 deposit settled as "Benjamin → Mufasa 67 · Alina → Mufasa 67".
