@@ -1,0 +1,3 @@
+# README example: Tolu pays the deposit for three people.
+people: Ada, Tolu, Sam
+Tolu paid 75 for deposit
