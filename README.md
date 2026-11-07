@@ -11,7 +11,10 @@ Full spec: [PRD.md](PRD.md)
 ## Demo
 
 - **Demo video:** _add link_
-- **Real run:** [`examples/real-run/`](examples/real-run/): a real trip planned with real friends. It has the chat transcript and the final Trip brief, Itinerary, Decisions log and Budget and split.
+- **Real run:** [`examples/real-run/`](examples/real-run/): three friends planned a real weekend in
+  Grand-Bassam (Côte d'Ivoire) in one hour. 3 decisions by vote + confirm, 4 agent-written documents,
+  one change request (Itinerary v4 → v5), and a $200 deposit settled as "Benjamin → Mufasa 67 · Alina → Mufasa 67".
+  Includes the chat transcript and the final Trip brief, Itinerary, Decisions log and Budget and split.
 
 ## How it works
 
@@ -41,14 +44,14 @@ Lead:      @treasurer balances                    → "Ada → Tolu 25 · Sam �
 | Room instructions | The workflow, the golden rule, timezone, Telegram-friendly formatting ([`room/instructions.md`](room/instructions.md)) |
 | Agents | Three Claude Code agents (scout, planner, treasurer), each in its own folder with its own `CLAUDE.md` |
 | Roles | scout (shared), planner (exclusive), treasurer (exclusive) ([`room/roles.md`](room/roles.md)) |
-| Aliases | `@scout`, `@planner`, `@treasurer` |
+| Aliases | `@scout`, `@planner`, `@treasurer` in the live room (the template relies on the role names instead, since an alias can't share a role's name) |
 | Main agent | `!assign-agent @planner`: un-tagged messages go to the planner |
 | Follow-ups | `!follow-ups off`: one agent answers per thread |
 | Room documents | Trip brief, Itinerary, Decisions log (planner) · Budget and split (treasurer) |
-| Agent settings | Friends allowed via "Who can talk to your agent"; tools limited per agent; bypass permissions off |
+| Agent settings | Friends allowed via "Who can talk to your agent"; each agent sees only its own folder; auto mode on, bypass permissions off |
 | Permission prompts | The owner approves tool use in chat (Allow once / session / Decline) |
 | Commands | `!roles`, `!list-documents`, `!agents-status`, `!interrupt`, `!reset` ([`room/commands.md`](room/commands.md)) |
-| Template | The room captured as YAML: [`template/triproom.yaml`](template/) |
+| Template | Captured from the real room in Switch Console, cleaned for reuse: [`template/triproom.yaml`](template/triproom.yaml) |
 
 Without Switch there's no shared room, no roles, no shared documents and no way for several agents and several people to work in one chat.
 
@@ -80,7 +83,7 @@ Full guide with screenshots and Windows fixes: [docs/setup.md](docs/setup.md)
    !follow-ups off
    ```
    Then create the roles with the messages in [`room/roles.md`](room/roles.md).
-6. Or skip steps 4–5: Switch Console → Templates → Import template → [`template/triproom.yaml`](template/).
+6. Or skip steps 4–5 on Mattermost: Switch Console → Templates → Import → [`template/triproom.yaml`](template/triproom.yaml). It creates the room with the instructions, the three roles and your three agents. (Telegram can't create chats, so on Telegram adopt your group and use steps 4–5.)
 7. Say `@planner start a trip`.
 
 ## Commands for the group
@@ -106,7 +109,7 @@ Want to double-check the treasurer? `python3 scripts/settle.py expenses.txt` pri
 - Agents never book, pay or ask for money. People do that themselves.
 - Every price has a source; unknowns are marked "Not stated".
 - Only first names and departure cities are collected. No passport, address or card details.
-- Each agent has only the tools it needs; permission prompts stay on; each agent folder holds only its `CLAUDE.md`.
+- Each agent folder holds only its `CLAUDE.md`; risky actions still ask the owner (auto mode on, bypass permissions off).
 
 ## Repo
 

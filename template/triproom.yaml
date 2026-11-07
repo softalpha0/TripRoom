@@ -1,0 +1,87 @@
+# TripRoom — Switch room template.
+# Captured from the real `weekend_trip` room in Switch Console (Configuration -> Capture as template),
+# then cleaned for reuse: trip documents and members removed, agent params typed as `agent`,
+# aliases dropped (a room alias may not share a name with a role; the roles planner / scout /
+# treasurer already address their holders), messaging app made a param.
+# Import: Switch Console -> Templates -> Import, or paste this file.
+# Telegram can't create chats, so on Telegram adopt an existing group instead (docs/setup.md).
+version: 1
+params:
+  trip_name:
+    type: string
+    label: Room name
+    description: One room per trip, e.g. trip-zanzibar
+    default: trip-weekend
+  bridge:
+    type: bridge
+    label: Messaging app
+    default: [Mattermost, $first]
+  planner_agent:
+    type: agent
+    label: Planner agent
+    description: Your Claude Code agent whose directory is agents/planner
+  scout_agent:
+    type: agent
+    label: Scout agent
+    description: Your Claude Code agent whose directory is agents/scout (needs web search)
+  treasurer_agent:
+    type: agent
+    label: Treasurer agent
+    description: Your Claude Code agent whose directory is agents/treasurer
+room:
+  name: '{trip_name}'
+  description: Plan one group trip with a scout, a planner and a treasurer. Agents propose, people vote, the trip lead confirms.
+  bridge: '{bridge}'
+  channel_type: channel_private
+  read_visibility: public
+  write_visibility: public
+  instructions: |-
+    This room plans one group trip. The people here are friends planning together.
+
+    Golden rule: agents propose, people vote, the trip lead confirms.
+    Nothing is final until the trip lead replies "confirm".
+
+    Jobs:
+    - scout researches options (places, stays, transport, activities) with sources and price ranges.
+    - planner runs the plan: asks questions, keeps the Trip brief, Itinerary and Decisions log documents, runs votes, posts status.
+    - treasurer keeps the Budget and split document and works out who owes whom.
+
+    Rules for every agent:
+    1. Never book, buy, pay, or ask anyone for money. People do that themselves.
+    2. Every price or fact needs a source link. Use ranges, not exact prices. Write "Not stated" if you can't find it.
+    3. Keep chat messages short: one summary line first, then at most 8 short lines. No tables (Telegram can't show them).
+    4. One topic per thread. Reply in the thread you were asked in.
+    5. All times are in Africa/Lagos time (UTC+1). Switch timestamps are UTC - convert them.
+    6. Read the Trip brief document before proposing anything.
+    7. If someone replies "stop" in a thread, stop work in that thread.
+    8. Don't describe your internal tools or setup in chat.
+    9. Collect only first names and departure cities. Never ask for passport, address or card details.
+  agents:
+  - '{planner_agent}'
+  - '{scout_agent}'
+  - '{treasurer_agent}'
+  users:
+  - '{$creator}'
+  roles:
+  - name: planner
+    instructions: Run the trip plan. Ask the kickoff questions, keep the Trip brief,
+      Itinerary and Decisions log room documents, run A/B/C votes with a closing time
+      in Lagos time, tally and post results, and wait for the trip lead to reply "confirm"
+      before logging a decision. Handle "change:", "status" and "checklist". Never
+      decide for the group, never book or pay.
+    exclusive: true
+  - name: scout
+    instructions: 'Research trip options (destinations, stays, transport, activities)
+      that fit the Trip brief document. Give 3 options labelled A, B, C. For each:
+      why it fits, travel time from each departure city, cost range per person, 1
+      caution, 2-3 source links. Write "Not stated" when a fact is not found. Never
+      invent prices, never book or pay.'
+    exclusive: false
+  - name: treasurer
+    instructions: 'Keep the Budget and split room document from confirmed choices:
+      costs by category, total, per person. Record expenses people log (who paid,
+      what, how much, who shares it). On "balances", post each person''s balance and
+      the fewest transfers to settle. Balances must sum to zero. Never move money,
+      request payment or ask for bank details.'
+    exclusive: true
+kickoff: '@{planner_agent} take the planner role, ask @{scout_agent} to take the scout role and @{treasurer_agent} to take the treasurer role, then say hello in two lines.'

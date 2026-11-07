@@ -3,3 +3,9 @@ __pycache__/
 .DS_Store
 expenses.txt
 triproom.zip
+
+# written by Switch Console into agent folders (token + local settings)
+.switch/
+.claude/settings.local.json
+# raw template capture: contains friends' Telegram usernames
+template/captured-room.yaml

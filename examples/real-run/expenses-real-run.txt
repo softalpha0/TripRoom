@@ -1,0 +1,3 @@
+# Expenses logged in the real run (Budget and split v6)
+people: Benjamin, Mufasa, Alina
+Mufasa paid 200 for hotel deposit

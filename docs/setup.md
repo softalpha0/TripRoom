@@ -83,18 +83,28 @@ Switch Console → **Your Agents → Add**, three times:
 
 | Field | scout | planner | treasurer |
 |---|---|---|---|
-| Name | `scout` | `planner` | `treasurer` |
-| Description | Researches trip options with sources | Runs the plan, votes, itinerary documents | Budget and fair cost split |
+| Name | `scout.<you>` | `planner.<you>` | `treasurer.<you>` |
+| Description (required) | Researches trip options with sources | Runs the plan, votes, itinerary documents | Budget and fair cost split |
 | Run location | This computer | This computer | This computer |
-| Directory | `…/triproom/agents/scout` | `…/triproom/agents/planner` | `…/triproom/agents/treasurer` |
 | Agent provider | Claude Code | Claude Code | Claude Code |
-| Model | sonnet | opus (or sonnet) | sonnet |
-| Advanced → Tools | WebSearch, WebFetch | WebSearch (travel times) | — |
+| Directory | `…\triproom\agents\scout` | `…\triproom\agents\planner` | `…\triproom\agents\treasurer` |
+| Who can talk to your agent | **Anyone** (or Custom rules: you + friends) | same | same |
+| Auto mode | on (default): safe actions run, risky ones still ask you | same | same |
 | Bypass permissions | **off** | **off** | **off** |
-| Who can talk to your agent | Custom rules: you + friends (or Anyone for a demo group) | same | same |
+| Advanced configuration | leave alone | leave alone | leave alone |
 
-Switch's own tools are always kept. Each agent folder contains **only** its `CLAUDE.md` — don't put
-anything else there; the agent can read its folder.
+- **Name:** lowercase letters, digits, `.`, `-`, `_` only, unique on the server. `<you>` is your
+  username in lowercase, e.g. `scout.softalpha0`. Friends never type it: each room gives it a short
+  alias (`@scout`). Inviting needs the full name; the alias works only after `!set-alias`.
+- **Who can talk to your agent:** the default, *Only me*, makes the agent refuse your friends.
+- **Link your messaging account** (Home → Messaging apps → Link account) for Telegram *and* Mattermost.
+  Until it's linked, even you read as a stranger and the agent refuses the work.
+- **Advanced configuration** (model, tools, system prompt) is written into a Claude Code subagent
+  definition and does **not** configure the sessions Switch starts, so don't rely on it for limits.
+  What limits each agent: its directory (only its `CLAUDE.md`), auto mode / permission prompts,
+  and the room instructions.
+- You don't start the agents yourself: Switch Console starts a session the first time an agent is
+  addressed. Keep Switch Console running.
 
 📸 `03-agents.png`
 

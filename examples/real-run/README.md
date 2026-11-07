@@ -1,7 +1,31 @@
 # Real run
 
-> **Status: not recorded yet.** Everything in this folder must come from the real Telegram session
-> with real friends. Nothing here is written by hand.
+> **Recorded Sat 7 Nov 2026, 11:32–12:30 Lagos time.** Three real people (Benjamin, Mufasa, Alina) in a
+> Telegram group with the three agents. Everything in this folder comes from that session; nothing is
+> written by hand.
+
+## What happened
+
+| | |
+|---|---|
+| Trip | Grand-Bassam via Abidjan, Côte d'Ivoire, Fri 4 – Sun 6 Dec 2026, 3 people from Lagos |
+| Decision 1 | Destination: B (Grand-Bassam) won 2–0 over Accra and Ouidah → confirmed |
+| Decision 2 | Stay: A (Koral Beach Hotel) won 3–0 → confirmed |
+| Decision 3 | Mufasa's `change:` swapped the museum for a lagoon pirogue trip (Itinerary v4 → v5), voted 3–0 → confirmed |
+| Documents | Trip brief v3, Itinerary v5, Decisions log (3 entries), Budget and split v6 |
+| Money | Mufasa logged a $200 hotel deposit → Benjamin → Mufasa 67, Alina → Mufasa 67 (sum 0) |
+
+Files: [transcript](transcript.md) · [Trip brief](trip-brief.md) · [Itinerary](itinerary.md) ·
+[Decisions log](decisions-log.md) · [Budget and split](budget-and-split.md) ·
+check the maths with `python3 scripts/settle.py examples/real-run/expenses-real-run.txt`.
+
+Things we noticed:
+- The planner opened a vote by itself when a friend answered "B" before any vote existed, and didn't count
+  Alina's vote until she said she was travelling.
+- The scout wrote "Not stated" for every price it couldn't source (entry fees, Sunday flight times).
+- Room aliases and role names are the same (`planner`, …). `@planner` resolves to the *role*, so before
+  the agents take their roles Switch warns "no agent currently holds the planner role". Have each agent
+  take its role right after the roles are created.
 
 ## Run sheet (record your screen the whole time)
 
@@ -47,9 +71,9 @@ Check the treasurer: write the expenses into a text file and run
 
 ## Success metrics (PRD §12)
 
-- [ ] ≥ 2 real people besides the lead
-- [ ] ≥ 3 decisions by vote + confirm (destination, stay, itinerary)
-- [ ] Every price/fact in scout posts has a source or "Not stated"
-- [ ] 4 room documents created by agents
-- [ ] Balances add to zero
-- [ ] Someone else can rebuild TripRoom (setup.md + template YAML)
+- [x] ≥ 2 real people besides the lead (Mufasa, Alina)
+- [x] ≥ 3 decisions by vote + confirm (destination, stay, itinerary change)
+- [x] Every price/fact in scout posts has a source or "Not stated"
+- [x] 4 room documents created by agents
+- [x] Balances add to zero (134 − 67 − 67 = 0)
+- [x] Someone else can rebuild TripRoom (docs/setup.md + template/triproom.yaml)

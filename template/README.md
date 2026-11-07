@@ -13,4 +13,7 @@
 To use it: Switch Console → **Templates → Import template** → `triproom.yaml`, then pick your own
 three agents for the agent fields.
 
-> Status: **not captured yet** — add `triproom.yaml` after the room is set up.
+> Status: **captured** from the real `weekend_trip` room on 7 Nov 2026. `triproom.yaml` is that capture
+> with the trip's documents and members removed, the agent params typed `agent`, the messaging app made a
+> param, and the aliases dropped (a room alias may not share a name with a role).
+> The raw capture (`captured-room.yaml`) stays out of git because it lists friends' Telegram usernames.

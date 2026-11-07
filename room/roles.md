@@ -41,3 +41,10 @@ treasurer: Keep the Budget and split room document from confirmed choices: costs
 ```
 
 Expected: scout → scout, planner → planner, treasurer → treasurer.
+
+## Note from the real run
+
+The roles have the same names as the aliases (`planner`, `scout`, `treasurer`), so `@planner` addresses
+the **role**. Until an agent takes it, Switch warns "no agent currently holds the planner role" (the
+message still reaches the agent by its alias). Send the three "take the … role" messages straight after
+defining the roles and the warning goes away.
